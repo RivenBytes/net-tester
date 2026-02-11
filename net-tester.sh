@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ======================================================
-#   Advanced Network Protocol Tester by A-battousai
+#   Advanced Network Tester by A-battousai
 #   GitHub: https://github.com/A-battousai
 # ======================================================
 
@@ -24,7 +24,7 @@ prepare_env() {
 
 clear
 echo -e "\e[1;36m======================================================\e[0m"
-echo -e "\e[1;33m       Network Tester by A-battousai                  \e[0m"
+echo -e "\e[1;33m      Advanced Network Tester by A-battousai          \e[0m"
 echo -e "\e[1;36m======================================================\e[0m"
 
 prepare_env
@@ -52,7 +52,6 @@ if [ "$SIDE" == "2" ]; then
 elif [ "$SIDE" == "1" ]; then
     echo -e "\n--- Side A: Tester Mode ---"
     read -p "Enter IP of Side B: " RAW_IP
-    # اصلاح خودکار ورودی: حذف کلمه IP، فضای خالی و دو نقطه
     B_IP=$(echo $RAW_IP | sed 's/[iIpP: ]//g')
     
     echo -e "Testing target: \e[1;34m$B_IP\e[0m"
@@ -71,10 +70,12 @@ elif [ "$SIDE" == "1" ]; then
     check_tcp_udp 5201 "iPerf3"
 
     echo -e "\n--- L3/Tunneling Analysis ---"
-    PING_DATA=$(ping -c 3 -W 2 $B_IP | tail -1 | awk -F '/' '{print $5}')
+    # تغییر تعداد پینگ به ۱۰ برای دقت بیشتر در فایروال‌ها
+    PING_DATA=$(ping -c 10 -W 2 $B_IP | tail -1 | awk -F '/' '{print $5}')
     if [ ! -z "$PING_DATA" ]; then
         echo -e "[Basic Ping]: \e[32mPASS (Latency: ${PING_DATA}ms)\e[0m"
-        ping -c 2 -s 1450 -W 2 $B_IP &>/dev/null && MTU_RES="\e[32mSUPPORTED\e[0m" || MTU_RES="\e[31mFAILED\e[0m"
+        # تست پکت‌های بزرگ با ۱۰ پینگ
+        ping -c 10 -s 1450 -W 2 $B_IP &>/dev/null && MTU_RES="\e[32mSUPPORTED\e[0m" || MTU_RES="\e[31mFAILED\e[0m"
         echo -e "[Large Packets]: $MTU_RES"
     else
         echo -e "[ICMP]: \e[31mFAILED\e[0m"
@@ -93,23 +94,22 @@ try:
         print(f'>> Quality Results: Loss={lost:.1f}% | Jitter={jitter:.1f}ms')
         
         print('\n\033[1;36m================= RECOMMENDATIONS =================\033[0m')
-        print(f'1. L3 Tunnels (GRE/IPIP): \033[92mEXCELLENT\033[0m (Ping is stable)')
+        print('1. Stable Tunneling: \033[92mEXCELLENT\033[0m (Path is clean)')
         
-        print('2. gRPC/Websocket (TCP): ', end='')
-        if lost < 2: print('\033[92mRecommended (High Speed)\033[0m')
-        else: print('\033[93mPossible (Expect some delay)\033[0m')
+        print('2. TCP-based (Reality/gRPC): ', end='')
+        if lost < 2: 
+            print('\033[92mHighly Recommended\033[0m')
+        else: 
+            print('\033[93mExpect minor delay\033[0m')
 
-        print('3. KCP/QUIC (UDP): ', end='')
-        if lost > 3: print('\033[92mBEST CHOICE (Fixes packet loss)\033[0m')
-        else: print('\033[94mOptional (Not required)\033[0m')
+        print('3. UDP-based (Hysteria/KCP): ', end='')
+        if lost > 3: 
+            print('\033[92mRecommended (to fix loss)\033[0m')
+        else: 
+            print('\033[94mOptional\033[0m')
         print('\033[1;36m===================================================\033[0m')
-
-        print('\n--- FINAL VERDICT ---')
-        if lost == 0: print('\033[92m[PERFECT]: Use GRE Tunnel + Any Protocol.\033[0m')
-        elif lost < 4: print('\033[93m[STABLE]: Use Reality (gRPC) or Shadowsocks.\033[0m')
-        else: print('\033[91m[POOR]: High Loss! Best fix is KCP or Paqet.\033[0m')
-except:
-    print('\n\033[91m[!] Quality test failed. iPerf3 port is blocked.\033[0m')
+except Exception:
+    print('\n\033[91m[!] Quality test failed. Connection was interrupted.\033[0m')
 "
     rm -f result.json
     echo -e "\n--- Test Finished by A-battousai ---"
