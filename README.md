@@ -14,7 +14,7 @@ Special thanks to [@RivenBytes](https://github.com/RivenBytes) for improving IP 
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/A-battousai/net-tester/main/net-tester.sh)
 ```
-(از سمت سرور دوم هم خواستید تست بیگرید، (مثلا میگیم خارج المان) دو طرف دستور رو بزنید و توی خارج گزینه 1 رو بزنید و بعد ip ایران و بزنید،..)
+(از سمت سرور دوم هم خواستید تست بیگرید، (مثلا میگیم خارج المان) دو طرف دستور رو بزنید و توی خارج گزینه 1 رو بزنید و بعد ip ایران و سمت ایران هم گزینه 2 رو بزنید،..)
 
 *
 *
