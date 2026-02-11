@@ -3,6 +3,7 @@ Advanced Network Protocol &amp; Quality Tester for Tunneling
 # Network Tester by A-battousai
 
 این اسکریپت برای تست پورت‌ها، پروتکل‌ها و کیفیت شبکه بین دو سرور طراحی شده است.
+<img width="1280" height="493" alt="image" src="https://github.com/user-attachments/assets/ad779cc7-a899-4001-a870-d53ecc4b831b" />
 
 ## نحوه استفاده:
 برای اجرا روی هر دو سرور ایران و خارج، دستور زیر را وارد کنید
