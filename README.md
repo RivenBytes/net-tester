@@ -28,9 +28,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/A-battousai/net-tester/main/ne
 ```
 اپدیت:
 -
-- تعداد ارسال پینگ و پکت به 10 تغییر کرد
--
-**
+تعداد ارسال پینگ و پکت ها به 10 عدد تغییر کرد
 
+
+*
 *
 *
