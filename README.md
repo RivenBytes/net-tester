@@ -13,6 +13,8 @@
 
 شماره 2 برای سروری که می خواید روش تست انجام بشه
 
+(بهتر روی دو طرف انجام بشه، یک بار سرور A به B، یک بار هم محض تست ریورس B به A)
+
   
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/A-battousai/net-tester/main/net-tester.sh)
