@@ -1,6 +1,7 @@
 # Network Tester by A-battousai
 
-<img width="1280" height="493" alt="image" src="https://github.com/user-attachments/assets/ad779cc7-a899-4001-a870-d53ecc4b831b" />
+<img width="1280" height="517" alt="image" src="https://github.com/user-attachments/assets/fc501334-fd18-4a71-a0f0-0ef8a574d561" />
+
 
 این اسکریپت برای تست پورت‌ها، پروتکل‌ها و کیفیت شبکه بین دو سرور طراحی شده است.
 -
@@ -28,7 +29,11 @@ bash <(curl -Ls https://raw.githubusercontent.com/A-battousai/net-tester/main/ne
 ```
 اپدیت:
 -
---بهبود توضیحات در نمایش (حذف قسمت های اضافی)
+-- تست واقغی پینگ ip سرور ها (برای مسدود بودن یا شدو بن بودن یک ip برای سرور شما)
+
+-- تست ارتباط با google (برای اکسس بودن یا نوبن سرور)
+
+بهبود توضیحات در نمایش (حذف قسمت های اضافی)
 
 --تعداد ارسال پینگ و پکت ها به 10 عدد تغییر کرد
 
