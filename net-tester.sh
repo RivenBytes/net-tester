@@ -70,11 +70,9 @@ elif [ "$SIDE" == "1" ]; then
     check_tcp_udp 5201 "iPerf3"
 
     echo -e "\n--- L3/Tunneling Analysis ---"
-    # تغییر تعداد پینگ به ۱۰ برای دقت بیشتر در فایروال‌ها
     PING_DATA=$(ping -c 10 -W 2 $B_IP | tail -1 | awk -F '/' '{print $5}')
     if [ ! -z "$PING_DATA" ]; then
         echo -e "[Basic Ping]: \e[32mPASS (Latency: ${PING_DATA}ms)\e[0m"
-        # تست پکت‌های بزرگ با ۱۰ پینگ
         ping -c 10 -s 1450 -W 2 $B_IP &>/dev/null && MTU_RES="\e[32mSUPPORTED\e[0m" || MTU_RES="\e[31mFAILED\e[0m"
         echo -e "[Large Packets]: $MTU_RES"
     else
@@ -94,15 +92,14 @@ try:
         print(f'>> Quality Results: Loss={lost:.1f}% | Jitter={jitter:.1f}ms')
         
         print('\n\033[1;36m================= RECOMMENDATIONS =================\033[0m')
-        print('1. Stable Tunneling: \033[92mEXCELLENT\033[0m (Path is clean)')
         
-        print('2. TCP-based (Reality/gRPC): ', end='')
-        if lost < 2: 
-            print('\033[92mHighly Recommended\033[0m')
+        print('1. TCP-based (gRPC/Websocket/TLS): ', end='')
+        if lost > 10: 
+            print('\033[91mNOT RECOMMENDED (Due to Loss)\033[0m')
         else: 
-            print('\033[93mExpect minor delay\033[0m')
+            print('\033[92mHighly Recommended\033[0m')
 
-        print('3. UDP-based (Hysteria/KCP): ', end='')
+        print('2. Multi-Path (KCP/Paqet/Hysteria): ', end='')
         if lost > 3: 
             print('\033[92mRecommended (to fix loss)\033[0m')
         else: 
